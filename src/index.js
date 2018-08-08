@@ -1,17 +1,7 @@
-import link from './assets/scss/style.scss';
+import './assets/scss/style.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export const Component = (props) => {
-  return ( < div > {
-    props.children
-  } < /div>
-  )
-}
-
-export default {
-  Component
-}
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
@@ -36,12 +26,19 @@ class NameForm extends React.Component {
   }
 
   render() {
-    return (<form onSubmit = {(e) => this.handleSubmit(e)}>
-      <label> Name: <input type = "text" value = {this.state.value} onChange = {(e) => this.handleChange(e)}/> </label><input type="submit" value="Submit" /></form>
+    return ( <form onSubmit = {
+        (e) => this.handleSubmit(e)
+      } >
+      <label> Name: < input type = "text"
+      value = {
+        this.state.value
+      }
+      onChange = {
+        (e) => this.handleChange(e)
+      }
+      /> </label > <input type = "submit"
+      value = "Submit" /> </form>
     );
   }
 }
-
-ReactDOM.render( <
-  NameForm / >,
-  document.getElementById('root'));
+ReactDOM.render( <NameForm /> , document.getElementById('root'));

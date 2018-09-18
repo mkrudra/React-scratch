@@ -1,0 +1,60 @@
+//** Define your custom responsive grid system
+//** Number of columns in the grid.
+
+$grid-columns: 12 !default;
+
+//** Padding between columns. Gets divided in half for the left and right.
+
+$grid-gutter-width: 30px !default;
+
+//** Container sizes
+
+$container-phone: (290px + $grid-gutter-width) !default;
+$container-xs: $container-phone !default;
+$container-tablet: (738px + $grid-gutter-width) !default;
+$container-sm: $container-tablet !default;
+$container-desktop: (995px + $grid-gutter-width) !default;
+$container-md: $container-desktop !default;
+$container-large-desktop: (1170px + $grid-gutter-width) !default;
+$container-lg: $container-large-desktop !default;
+
+//
+// Grid system
+// --------------------------------------------------
+@import './grid-framework'; 
+
+// Fluid container and Container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+.container-fluid,.container {
+    @include container-fixed;
+}
+
+// Columns
+//
+// Common styles Extra small screen / phone grid columns
+@include make-grid-columns;
+@include make-grid(xs);
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+.row {
+    @include make-row;
+}
+
+@mixin grid480 {
+    .container {max-width: $container-sm;}   
+    @include make-grid(sm);
+}
+
+@mixin grid768 {
+    .container {max-width: $container-md;}
+    @include make-grid(md);
+}
+
+@mixin grid1025 {
+    .container {max-width: $container-lg;}
+    @include make-grid(lg);
+}

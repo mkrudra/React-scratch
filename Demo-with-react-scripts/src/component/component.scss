@@ -1,0 +1,22 @@
+$color: #c1c1c1;
+
+body {
+ color: $color;
+}
+
+ul {
+ list-style: none;
+ color: #000;
+}
+
+.flex {
+ display: flex;
+
+ strong {
+  width: 120px;
+ }
+
+ ul {
+  padding-left: 0;
+ }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "nwb",
+  "version": "1.0.0",
+  "description": "project using javascript and node.js",
+  "main": "webpack.common.js",
+  "scripts": {
+    "start": "webpack-dev-server --config ./config/webpack.common.js --open",
+    "build": "gulp && webpack --config ./config/webpack.common.js"
+  },
+  "author": "Manish kumar singh",
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      "> 1%",
+      "ie 9"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-helper-evaluate-path": "^0.4.3",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-minify-simplify": "^0.4.3",
+    "brotli-gzip-webpack-plugin": "^0.5.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "url-loader": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-webp": "^3.0.0",
+    "imagemin-mozjpeg": "^7.0.0",
+    "imagemin-optipng": "^5.2.1",
+    "run-sequence": "^2.2.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "browserslist": "^4.1.1"
+  }
+}

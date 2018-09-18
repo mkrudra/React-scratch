@@ -1,0 +1,235 @@
+// Author     : manishkumar.singh
+// clearfix mixin
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// css3 browser vender prefix mixin
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+    @if $vendors {
+        @each $vendor in $vendors {
+            #{"-" + $vendor + "-" + $property}: #{$value};
+        }
+    }
+    #{$property}: #{$value};
+}
+
+// Photoshop Drop Shadow
+@mixin photoshop-drop-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000, $inner: false) {
+    $angle: (180 - $angle) * pi() / 180; // convert to radians
+    $h-shadow: round(cos($angle) * $distance);
+    $v-shadow: round(sin($angle) * $distance);
+    $css-spread: $size * $spread/100;
+    $blur: ($size - $css-spread);
+    $inset: if($inner !=false, 'inset', '');
+    $box-shadow: ($h-shadow $v-shadow $blur $css-spread $color unquote($inset));
+    @include prefix (box-shadow, $box-shadow);
+}
+
+// Photoshop Text Shadow
+@mixin photoshop-text-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000) {
+    // NOTE: $spread has no effect for text shadows
+    $angle: (180 - $angle) * pi() / 180;
+    $h-shadow: round(cos($angle) * $distance);
+    $v-shadow: round(sin($angle) * $distance);
+    $css-spread: $size * $spread/100;
+    $blur: ($size - $css-spread);
+    $value: ($h-shadow $v-shadow $blur $color);
+    @include prefix (text-shadow, $value);
+}
+
+// Viewport-width unit function 
+@function vw($count-width, $viewport-width, $unit:vw) {
+    $return: $count-width /($viewport-width / 100);
+    @return $return+$unit;
+}
+
+// hear size function help us mapping via map-get(); in Scss.
+// $size: ( 
+//  h-group: (
+//  h1: 36px, // page title text size.
+//  ),
+//  p: 16px, // font size for base size.
+// );
+// ex: [for two group] .selector{font-size: set($group-name, sub-group-name, key);} or
+// ex: [for one group] .selector{font-size: set($group-name, key);}
+@function set($group: null, $sub-group: null, $sub-group-val:null, $nesting-step:true) {
+    @if $nesting-step==true {
+        @if ($sub-group-val !=null) {
+            @return map-get(map-get($group, $sub-group), $sub-group-val);
+        }
+    }
+    @if ($sub-group !=null) {
+        @return map-get($group, $sub-group);
+    }
+}
+
+// Positional mixins 
+@mixin pos($pos:static, $top:null, $right:null, $bottom:null, $left:null, $z-index:null) {
+    @if (($pos==relative) or ($pos==re)) {
+        position: relative;
+    }
+    @else if (($pos==absolute) or ($pos==ab)) {
+        position: absolute;
+    }
+    @else if (($pos==fixed) or ($pos==fi)) {
+        position: fixed;
+    }
+    @else if ($pos==static) {
+        position: static;
+    }
+    top:$top;
+    right:$right;
+    bottom:$bottom;
+    left:$left;
+    z-index:$z-index;
+}
+
+// Dispaly mixins
+@mixin dis($maxw:null, $w:null, $dis:null, $m:0 auto) {
+    @if (($dis==block) or ($dis==table)) {
+        display: $dis;
+        margin: $m;
+    }
+    @if (($dis==none) or ($dis==null)) {
+        display: $dis;
+    }
+    @else if (($dis==inline-block)) {
+        display: $dis;
+        vertical-align: top;
+    }
+    @else if (($dis==left) or ($dis==right)) {
+        float: $dis;
+        margin: $m;
+    }
+    max-width: $maxw;
+    width: $w;
+}
+
+// Responsive iframe mixins
+@mixin maintain-ratio($ratio: 1 1, $dis: null, $maxw: null, $m:0 auto) {
+    @if length($ratio) < 2 or length($ratio)>2 {
+        @warn "$ratio must be a list with two values.";
+    }
+    $height: percentage(nth($ratio, 2) / nth($ratio, 1));
+    @if (($dis==block) or ($dis==table)) {
+        display: $dis;
+        margin: $m;
+    }
+    @else if ($dis==inline-block) {
+        display: $dis;
+        vertical-align: top;
+    }
+    @else if (($dis==left) or ($dis==right)) {
+        float: $dis;
+        margin: $m;
+    }
+    width: 100%;
+    max-width: $maxw;
+    overflow: hidden;
+    position: relative;
+    &:before {
+        content: '';
+        clear: both;
+        display: block;
+        width: 100%;
+        padding-bottom: $height;
+        height: 0px;
+    }
+    >iframe,>img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        background: #000;
+        border: 0;
+    }
+}
+
+// bg mixin for attached background image.
+$path--rel: "../images";
+@mixin bg($img, $repeat:null, $background-position: null, $bg-size: null, $background-color:null) {
+    background: #{$background-color} url('#{$path--rel}/#{$img}') #{$repeat} #{$background-position};
+    background-size: $bg-size;
+}
+
+// mq mixin for @media query
+@mixin mq($point,
+$query1: min,
+$query2: width) {
+    @media (#{$query1}-#{$query2}: $point+px) {
+        @content;
+    }
+}
+
+// bg-ratio mixins as per image
+@mixin bg-ratio($ratio: 1 1,
+$align:center,
+$z:99) {
+    @if length($ratio) < 2 or length($ratio)>2 {
+        @warn "$ratio must be a list with two values.";
+    }
+    $height: percentage(nth($ratio, 2) / nth($ratio, 1));
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        padding-bottom: $height;
+    }
+    @if ($align !=null) {
+        overflow: hidden;
+        position: relative;
+        >* {
+            @if ($align==center) {
+                @include pos(ab, 50%, null, null, 50%, $z);
+                @include prefix(transform, translate(-50% ,-50%), webkit ms);
+            }
+            @else if ($align==center-top) {
+                @include pos(ab, 0, 0, null, 0, $z);
+            }
+            @else if ($align==center-bottom) {
+                @include pos(ab, null, 0, 0, 0, $z);
+            }
+            @else if ($align==center-left) {
+                @include pos(ab, 50%, null, null, 0, $z);
+                @include prefix(transform, translateY(-50%), webkit ms);
+            }
+            @else if ($align==center-right) {
+                @include pos(ab, 50%, 0, null, null, $z);
+                @include prefix(transform, translateY(-50%), webkit ms);
+            }
+            @else if ($align==left-top) {
+                @include pos(ab, 0, null, null, 0, $z);
+            }
+            @else if ($align==left-bottom) {
+                @include pos(ab, null, null, 0, 0, $z);
+            }
+            @else if ($align==right-top) {
+                @include pos(ab, 0, 0, null, null, $z);
+            }
+            @else if ($align==right-bottom) {
+                @include pos(ab, null, 0, 0, null, $z);
+            }
+            margin: auto;
+        }
+    }
+}
+
+// ===Fonts mixins
+@mixin fa {
+    font-family: 'fontawesome';
+}
+@mixin lato {
+    font-family: 'lato', sans-serif;
+}
+@mixin cmt {
+    font-family: 'Cormorant', serif;
+}

@@ -1,0 +1,147 @@
+// For Dev server environment source path
+$bg-path: '../images' !default;
+$fa-font-path: '../fonts' !default;
+$bg: ( 
+body-bg:#fff,
+archive: ( 
+bg: #1f2c43, 
+hover-bg: #e5ecf6, 
+month-bg: #e5ecf6, 
+month-hover-bg: #e5ecf6, 
+active-bg: #e5ecf6, 
+active-hover-bg: #e5ecf6,
+color:#fff,
+hover-color:#b7753e,
+size:20px
+), 
+search:( 
+bg: #fff, 
+font-size: 18px, 
+hover-color: #101011, 
+placeholder-color: #62646a, 
+input-color: #62646a, // search input text color.
+color: #62646a
+)
+);
+$login:(
+bg: #203655,
+color: #e5ecf6,
+hover-bg: #2e4a71
+);
+
+// Fonts Colors
+$colors: ( 
+base: #23272f, // base font color
+link: #23272f, // All link color
+hover: #23272f, // All link hover color 
+h1-color:#203655, 
+h2-color:#23272f, 
+h3-color:#b7753e,
+);
+
+
+// Fonts size
+$size: ( 
+h-group-mobile: ( 
+h1: 32px, 
+h1-lineheight:1.2, 
+h2: 16px, 
+h2-lineheight:26px, 
+h3: 32px, 
+h3-lineheight:1.2, 
+view-title:32px, 
+view-title-lineheight:1.2), 
+h-group-tablet: ( 
+h1: 32px, 
+h1-lineheight:1.2, 
+h2: 16px, 
+h2-lineheight:(26/16), 
+h3: 32px, 
+h3-lineheight:1.2, 
+view-title:32px, 
+view-title-lineheight:1.2), 
+h-group-desktop: ( 
+h1: 52px,
+h1-lineheight:(66/52), 
+h2: 20px, 
+h2-lineheight:1.2, 
+h3: 36px, 
+h3-lineheight:1.2, 
+view-title:36px, 
+view-title-lineheight:1.2
+), 
+text-mobile: 16px, 
+text-lineheight-mobile:26px, 
+text-desktop: 20px, 
+text-lineheight-desktop:30px,
+);
+
+// font weight
+$weight:( 
+h1:400, 
+h2:400, 
+h3:400, 
+text:400
+);
+
+// for navigation
+$nav: ( 
+top: ( 
+bg: transparent, 
+bar-height: 50px, 
+text-size: 18px, 
+link: #62646a, 
+hover: #2d374b, 
+active: #2d374b, 
+tier-1-bg: #fff, 
+tier-1-hover-bg: #fff, 
+tier-1-active-bg: #fff,
+tier-1-angle:  #77797f,
+tier-1-angle-active:#2d374b,
+tier-1-link: #77797f, 
+tier-1-hover: #2d374b, 
+tier-1-active: #2d374b, 
+tier-2-bg:#fff, 
+tier-2-hover-bg:#fff, 
+tier-2-active-bg:#fff, 
+tier-2-angle:  #77797f,
+tier-2-angle-active:#2d374b,
+tier-2-link: #77797f, 
+tier-2-hover: #2d374b, 
+tier-2-active: #2d374b, 
+tier-3-bg:#fff, 
+tier-3-hover-bg:#fff, 
+tier-3-active-bg:#fff, 
+tier-3-angle:  #77797f,
+tier-3-angle-active:#2d374b,
+tier-3-link: #77797f, 
+tier-3-hover: #2d374b, 
+tier-3-active: #2d374b,
+),
+mobile: (
+row-height:50px,
+link: #62646a, 
+hover: #2d374b, 
+active: #2d374b,
+color-foobar: #203655, 
+color-foobar-hover: #203655, 
+color-meanbar: #203655,
+color-meanbar-hover: #203655,
+mean-bar-height: 50px,
+foo-bar-height: 50px, 
+mean-font-size: 18px, 
+foo-font-size: 18px, 
+font-sub-tier: 18px, 
+mean-btn-width: 90px, 
+foo-btn-width: 80px, 
+expand-click: #f2f3f5, 
+border: #f2f3f5, 
+border-2: #b7753e,
+icon-size: 22px,
+), 
+footer: ( 
+link:#e5ecf6, 
+hover: #e5ecf6, 
+active: #e5ecf6, 
+font-size:18px, 
+));

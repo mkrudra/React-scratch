@@ -1,0 +1,14 @@
+{
+ "presets": [  
+  [
+   "@babel/preset-env"   
+  ]
+ ],
+ "plugins": [
+    ["@babel/plugin-transform-runtime", {      
+      "useESModules": true
+    }],
+    ["@babel/plugin-syntax-dynamic-import"],
+    ["minify-simplify"]
+  ]
+}

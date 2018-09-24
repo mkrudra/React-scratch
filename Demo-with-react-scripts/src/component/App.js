@@ -2,7 +2,6 @@ import React,{ Component } from 'react';
 import Header from './Header';
 import Routes from './../Routes';
 import './component';
-import Abc from './Abc';
 
 class App extends Component {
 
@@ -11,7 +10,6 @@ class App extends Component {
       <div>
         <Header/>
         <Routes/>
-        <Abc/>
       </div>
 
     );

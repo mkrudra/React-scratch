@@ -4,46 +4,48 @@ import {
   USER_SUCCESS,
   USER_FAILED
 } from './../actions/types';
-import { clone } from './../utils/common';
+import {
+  clone
+} from './../utils/common';
 
-const initialState = {
+const INITIAL_STATE = {
   isLoading: false,
   isLoaded: false,
   userData: null
 };
 
-export default (state = initialState, action = {}) => {
-  let changes = {};
-
+export default (state = INITIAL_STATE, action = {}) => {
+  var updatedata = {};
   switch (action.type) {
-
     case USER_RESET:
+      state=null;
+    break;
     case USER_FAILED:
-      changes = { ...initialState };
+      updatedata = { ...INITIAL_STATE
+      }
       break;
 
     case USER_INIT:
-      changes = {
+      updatedata = {
         isLoading: true,
         isLoaded: false,
         userData: null
-      };
+      }
       break;
 
-    case USER_SUCCESS: {
-      const userData = "jsdkasjlkd";
-      changes = {
+    case USER_SUCCESS:
+    const userdata = Object.assign({}, action.payload.data);
+    
+      updatedata = {
         isLoading: false,
         isLoaded: true,
-        userData
-      };
-    }
+        userData: userdata
+      }
       break;
 
     default:
-      changes = {};
+      updatedata = {}
       break;
   }
-
-  return clone(state, changes);
-};
+  return updatedata;
+}

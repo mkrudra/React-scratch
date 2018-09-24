@@ -1,5 +1,7 @@
 import React from 'react';
-import API from '../utils/api';
+
+import { connect } from 'react-redux';
+import { userRequest,userReset } from './../actions/userAction';
 
 class About extends React.Component {
   state = {
@@ -7,30 +9,19 @@ class About extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
+    this.props.userRequest('/photos');   
+  }
+  componentWillUnmount(){
+    this.props.userReset()
   }
 
-
-  getData = () => {
-    API.get('/photos')
-      .then(response => {
-        this.setState({
-          response: response          
-        })
-        console.log(response);
-      })
-      .catch(error => {
-        console.log("error = ", error);
-      });
-  }
   render() {
     let mydata = null;
-    if (this.state.response != null) {
-     mydata = this.state.response.data.slice(0, 10).map((data) => {
+    if (this.props.userData != null) {
+     mydata = this.props.userData.data.slice(0, 3).map((data) => {
         return (
           <ul key={data.id}>
-            <li className="flex"><img src={data.thumbnailUrl} alt="" /> {data.title}</li>
-            <li className="flex"><strong>Url:</strong> {data.url}</li>           
+            <li className="flex"><img src={data.thumbnailUrl} alt="" /></li>         
           </ul>
         );
       });
@@ -44,4 +35,16 @@ class About extends React.Component {
 
 }
 
-export default About;
+
+function mapStateToProps(state) {
+  console.log('state data',state);
+  return ({
+    isLoading: state.userData.isLoading,
+    isLoaded: state.userData.isLoaded,
+    userData: state.userData.userData
+  });
+}
+
+export default connect(mapStateToProps, {
+  userRequest,userReset
+})(About);

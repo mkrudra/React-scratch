@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './login/LoginPage';
 
 class Contact extends React.Component {
 
@@ -6,6 +7,7 @@ class Contact extends React.Component {
     return(
       <div>
         My Contact...
+        <Login/>
       </div>
     );
   }

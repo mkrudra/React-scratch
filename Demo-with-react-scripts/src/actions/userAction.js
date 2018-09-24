@@ -4,8 +4,10 @@ import {
   USER_SUCCESS,
   USER_FAILED
 } from './types';
+import API from './../utils/api';
 
 export function userReset() {
+  console.log('hi reset')
   return {
     type: USER_RESET,
   };
@@ -17,15 +19,13 @@ export function userInit() {
   };
 }
 
-export function userSuccess(data, headers) {
-  return {
+export function userSuccess(data) {
+  return ({
     type: USER_SUCCESS,
     payload: {
-      receivedAt: Date.now(),
-      data,
-      headers,
+      data: data
     },
-  };
+  });
 }
 
 export function userFailed(error) {
@@ -34,13 +34,18 @@ export function userFailed(error) {
   };
 }
 
-export function userRequest() {
-
+export function userRequest(url) {
   return (dispatch) => {
-    
-    dispatch(userSuccess());
-    
-    return ({abc: "abcdghfhj"});
-  };
 
+    API.get(url)
+      .then(response => {
+        dispatch(userSuccess(response));
+      })
+      .catch(error => {
+        console.log("error = ", error);
+        dispatch(userFailed(error));
+      });
+
+    dispatch(userInit());
+  }
 }

@@ -204,22 +204,14 @@ module.exports = {
                           }),
                         ],
                       },
-                    },                    
+                    },
                   ],
-                },                
+                },
                 extractTextPluginOptions
               )
-            ),            
+            ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
-          {
-            test: /\.(sa|sc)ss$/,
-            use: [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              require.resolve('sass-loader'),
-            ]
-           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
@@ -278,7 +270,7 @@ module.exports = {
         // https://github.com/facebookincubator/create-react-app/issues/2376
         // Pending further investigation:
         // https://github.com/mishoo/UglifyJS2/issues/2011
-        comparisons: true,
+        comparisons: false,
       },
       mangle: {
         safari10: true,
